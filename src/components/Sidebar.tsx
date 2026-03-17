@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import EventCard from './EventCard';
 
 interface SidebarProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   events: any[];
   onEventClick?: (id: string) => void;
   selectedEventId?: string | null;

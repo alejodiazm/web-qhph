@@ -72,7 +72,8 @@ export default function CreateEventPage() {
       }
 
       router.push('/');
-    } catch (err: any) {
+    } catch (error) {
+      const err = error as Error;
       setErrorMsg(err.message || 'Error publicando el evento.');
     } finally {
       setLoading(false);

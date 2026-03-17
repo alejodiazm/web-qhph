@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 interface MapProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   events: any[];
   onMarkerClick?: (id: string) => void;
   selectedEventId?: string | null;
@@ -21,21 +22,7 @@ const defaultIcon = L.icon({
   shadowSize: [41, 41]
 });
 
-const extractCoordinates = (location: any): [number, number] | null => {
-  if (!location) return null;
-  // Si viene como WKT: "POINT(-74.0817 4.6097)"
-  if (typeof location === 'string') {
-    const match = location.match(/POINT\(([-]?[0-9]*\.?[0-9]+)\s+([-]?[0-9]*\.?[0-9]+)\)/);
-    if (match) {
-      return [parseFloat(match[2]), parseFloat(match[1])]; // [lat, lng]
-    }
-  }
-  // Alternativa (JSON con coordenadas)
-  if (location.lat !== undefined && location.lng !== undefined) {
-    return [location.lat, location.lng];
-  }
-  return null;
-};
+
 
 const Map = ({ events, onMarkerClick, selectedEventId }: MapProps) => {
   const center: [number, number] = [4.6097, -74.0817]; // Bogotá
